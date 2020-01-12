@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="myApp">
+        <button type="button" @click='getAllDatas'>Увидеть все данные</button>
+        <table border="1">
+            <thead>
+                <th>ID</th>
+                <th>adress</th>
+                <th>image</th>
+            </thead>
+            <tbody>
+                <tr v-for="content in contents">
+                    <td>
+                        <a href="">
+                            {{content.id}}
+                        </a>
+                    </td>
+                    <td>{{content.address}}</td>
+                    <td>
+                        <img v-bind:src='content.previewImage' />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <script>
+       let app = new Vue({
+            el:'#myApp',
+            data:{
+                contents: '',
+                url: {
+                    avito: 'http://134.209.138.34/items',
+                }
+
+            },
+            created: function(){
+
+            },
+            methods:{
+                getAllDatas(){
+                    axios.get(this.url.avito).then((response)=>{
+                        this.contents=response.data;
+                    })
+                }
+            }
+        })
+    </script>
+
+    
+</body>
+</html>
